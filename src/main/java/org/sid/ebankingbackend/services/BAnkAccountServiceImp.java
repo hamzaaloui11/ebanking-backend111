@@ -44,6 +44,7 @@ public class BAnkAccountServiceImp implements BankAccountSer{
     public CurrentBankAccountDTO saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException {
         CurrentAccount currentAccount=new CurrentAccount();
         Customer customer = customerRepo.findById(customerId).orElse(null);
+        log.info("Saving new Account");
         if(customer==null)
             throw new CustomerNotFoundException("Customer not found");
 
@@ -54,6 +55,7 @@ public class BAnkAccountServiceImp implements BankAccountSer{
         currentAccount.setCustomer(customer);
         CurrentAccount savedBankAccount=bankAccountRepo.save(currentAccount);
         return dtoMapper.fromCurrentBankAccount(savedBankAccount);
+
     }
 
     @Override
@@ -156,8 +158,10 @@ public class BAnkAccountServiceImp implements BankAccountSer{
 
     @Override
     public CustomerDto getCustomer(Long customerId) throws CustomerNotFoundException {
+        log.info("List Customer");
         Customer customer = customerRepo.findById(customerId).orElseThrow(()->new CustomerNotFoundException("customer not found"));
         return dtoMapper.fromCustomer(customer);
+
     }
 
     @Override

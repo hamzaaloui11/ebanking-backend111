@@ -3,7 +3,6 @@ package org.sid.ebankingbackend.web;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sid.ebankingbackend.dtos.CustomerDto;
-import org.sid.ebankingbackend.entites.Customer;
 import org.sid.ebankingbackend.exceptions.CustomerNotFoundException;
 import org.sid.ebankingbackend.services.BankAccountSer;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +40,7 @@ public class CustomerRestConroller {
     public CustomerDto updateCustomer(@PathVariable Long customerId,@RequestBody  CustomerDto customerDto){
         customerDto.setId(customerId);
       return   bankAccountSer.upditeCustomer(customerDto);
+
     }
 
     @DeleteMapping("/customers/{id}")
